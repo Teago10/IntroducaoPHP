@@ -12,5 +12,16 @@
         die('Erro na conexão');
     }
 
-        echo  'Conexão realizada com suscesso!';
+        //echo  'Conexão realizada com sucesso!';
+
+        $sql = "SELECT id, nome, preco, estoque from produtos";
+        $resultado = $conexao->query($sql);
+
+        if($resultado->num_rows > 0 )
+        {
+            while ($linha = $resultado->fetch_assoc()){
+                //echo "Código: {$linha['id']}  Produto: {$linha['nome']}  Preço: R$ {$linha['preco']}  Em estoque: {$linha['estoque']}";
+                echo "<p>Código: $linha[id]  Produto: $linha[nome]  Preço: R$ $linha[preco] Em estoque: $linha[estoque]";
+                }
+        }
 ?>
