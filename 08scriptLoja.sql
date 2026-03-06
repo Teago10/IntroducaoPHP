@@ -14,7 +14,3 @@ INSERT INTO produtos(nome, preco, estoque) VALUES
     ('caixa de som', 675.00, 12);
 
 SELECT id, nome, preco, estoque FROM loja.produtos;
-
-quando fomos executar o select não aconteceu nada, pois "FROM produtos"
-estava direcionando para o "DATABASE escola" na qual ocasionava erro.
-E a solução foi colocar loja.produtos para resolver.
