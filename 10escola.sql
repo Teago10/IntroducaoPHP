@@ -6,7 +6,7 @@ CREATE TABLE alunos (
 
 	id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(70),
-    idade int,
+    idade TINYINT,
     uf CHAR(2),
     cidade VARCHAR(50)
 );

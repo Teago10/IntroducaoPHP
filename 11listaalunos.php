@@ -1,33 +1,36 @@
 <?php
-
-    $servidor = "localhost";
-    $usuario = "root";
-    $senha = "";
-    $banco = "escola_thiago";
-
-    $conexao = new mysqli($servidor, $usuario, $senha, $banco);
+    $conexao = mysqli_connect("localhost", "root", "", "escola_thiago");
 
     if($conexao->connect_error) 
     {
         die("Erro na conexão");
     }
 
-    //echo 'Conexão realizada com sucesso';
+    echo "<table border='1' cellpadding='8'>";
 
-    $sql_mostrar_campos = "SELECT id, nome, idade, uf, cidade FROM alunos";
-    $resultado = $conexao->query($sql_mostrar_campos);
+    echo "<tr>
+        <th>Código</th>
+        <th>Alunos</th>
+        <th>Idade</th>
+        <th>UF</th>
+        <th>Cidade</th>
+    </tr>";
 
-    if($resultado->num_rows > 0){
+    //$sql_mostrar_campos = "SELECT id, nome, idade, uf, cidade FROM alunos";
+    //$resultado = $conexao->query($sql_mostrar_campos);
 
-        while($linha = $resultado->fetch_assoc()){
-                echo '<p>-------------------------------------------------------';
-                echo "<p><strong>Código Aluno:</strong> $linha[id] 
-                <strong>Aluno:</strong> $linha[nome] <br>
-                <strong>Idade:</strong> $linha[idade] 
-                <strong>UF:</strong> $linha[uf] 
-                <strong>Cidade:</strong> $linha[cidade]";
+    $sql = "SELECT id, nome, idade, uf, cidade FROM alunos";
+    $resultado = $conexao->query($sql);
 
-        }
+    while($linha = $resultado->fetch_assoc()){
+        echo "<tr>";
+        
+        echo"<td>".$linha['id']."</td>";
+        echo"<td>".$linha['nome']."</td>";
+        echo"<td>".$linha['idade']."</td>";
+        echo"<td>".$linha['uf']."</td>";
+        echo"<td>".$linha['cidade']."</td>";
+        echo "</tr>";
     }
-
+    echo "</table>";
 ?>
