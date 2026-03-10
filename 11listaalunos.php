@@ -16,9 +16,6 @@
         <th>Cidade</th>
     </tr>";
 
-    //$sql_mostrar_campos = "SELECT id, nome, idade, uf, cidade FROM alunos";
-    //$resultado = $conexao->query($sql_mostrar_campos);
-
     $sql = "SELECT id, nome, idade, uf, cidade FROM alunos";
     $resultado = $conexao->query($sql);
 
@@ -30,6 +27,7 @@
         echo"<td>".$linha['idade']."</td>";
         echo"<td>".$linha['uf']."</td>";
         echo"<td>".$linha['cidade']."</td>";
+        
         echo "</tr>";
     }
     echo "</table>";
