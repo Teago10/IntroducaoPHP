@@ -1,16 +1,27 @@
 <?php
     $consultacep = [
-        'cep' => 17543828,
-        'rua' => 'Rua 14 de Dezembro',
-        'bairro' => 'Centro',
-        'cidade' => 'Marília',
-        'uf' => 'SP'
+        'Cep' => 17543828,
+        'Rua' => 'Rua 14 de Dezembro',
+        'Bairro' => 'Centro',
+        'Cidade' => 'Marília',
+        'UF' => 'SP'
     ];
 
-    echo "CEP: $consultacep[cep]<br>
-    Rua: $consultacep[rua]<br>
-    Bairro: $consultacep[bairro]<br>
-    Cidade: $consultacep[cidade]<br>
-    UF: $consultacep[uf]";
-
 ?>
+
+
+<!DOCTYPE html>
+    <html lang="pt-br">
+
+        <head>
+            <meta charset="UTF-8">
+            <title>Calculo da Idade</title>
+        </head>
+        <body>
+            <?php
+                foreach ($consultacep as $chave => $valor) {
+                    echo "$chave : $valor <br>";
+                }
+            ?>
+        </body>
+    </html>

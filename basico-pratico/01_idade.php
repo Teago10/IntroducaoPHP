@@ -5,9 +5,20 @@
     $curso = 'Desenvolvimento de sistemas';
 
     $idade = $dataAtual->diff($dataNascimento);
-    
-    echo "Nome: $nome <br>";
-    echo "Idade: $idade->y <br>";
-    echo "Curso: $curso";
-
 ?>
+
+<!DOCTYPE html>
+    <html lang="pt-br">
+
+        <head>
+            <meta charset="UTF-8">
+            <title>Calculo da Idade</title>
+        </head>
+        <body>
+            <?php 
+                echo "Nome: $nome <br>";
+                echo "Idade: $idade->y anos, $idade->m meses, $idade->d dias <br>";
+                echo "Curso: $curso";
+            ?>
+        </body>
+    </html>
