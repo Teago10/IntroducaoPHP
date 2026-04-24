@@ -65,6 +65,23 @@
             return ($this->altura * $this->cumprimentoBase)/2;
         }
     }
+
+    class Circulo extends Forma{
+
+        private $raio;
+
+        public function __construct(float $raio)
+        {
+            $this-> tipoForma = 'Circulo';
+            $this-> raio = $raio;
+
+        }
+
+        public function calculaArea()
+        {
+            return number_format(M_PI * pow($this->raio, 2),2, ',' , '.');
+        }
+    }
     
     $objQ = new Quadrado(10.0);
     $objQ->imprimirForma();
@@ -74,5 +91,8 @@
 
     $objT = new Triangulo(14.0 , 4);
     $objT->imprimirForma();
+
+    $objC = new Circulo(5);
+    $objC->imprimirForma()
 
 ?>
