@@ -28,8 +28,6 @@
         }
     }
 
-    $obj = new Quadrado(10.0);
-    $obj->imprimirForma();
 
     class Retangulo extends Forma{
 
@@ -49,8 +47,32 @@
         }
 
     }
+
+    class Triangulo extends Forma{
+
+        public $cumprimentoBase;
+        public $altura;
+
+        public function __construct(float $cumprimentoBase, float $altura)
+        {
+            $this-> tipoForma = 'Triângulo';
+            $this-> cumprimentoBase = $cumprimentoBase;
+            $this-> altura = $altura;
+        }
+
+        public function calculaArea()
+        {
+            return ($this->altura * $this->cumprimentoBase)/2;
+        }
+    }
     
+    $objQ = new Quadrado(10.0);
+    $objQ->imprimirForma();
+
     $objR = new Retangulo(10.0 , 20.0);
     $objR->imprimirForma();
+
+    $objT = new Triangulo(14.0 , 4);
+    $objT->imprimirForma();
 
 ?>
