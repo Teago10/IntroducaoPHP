@@ -7,6 +7,10 @@
         private string $conta;
         private float $saldo;
 
+        public function contaFormatada(){
+            return $this->tipoDeConta . 'Conta: '. $this->conta . 'Agência: ' . $this->agencia;
+        }
+        
         private array $movimentacao = [];
 
         public function __construct(string $tipoDeConta, string $agencia, string $conta, float $saldoInicial = 0.00){
@@ -33,6 +37,16 @@
             $this->saldo -= $valor;
         }
 
+        public function transferencia(float $valor, conta $contaDestino){
+            if($this->saldo >= $valor){
+                $this->saque($valor);
+                $contaDestino->deposito($valor);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         public function saldo(){
             return $this->saldo;
         }
@@ -40,6 +54,8 @@
         public function incluiMovimentacao(itemExtrato $item){
             $this-> movimentacao[] = $item;
         }
+
+        
 
         abstract protected function calculaSaldo();
     }

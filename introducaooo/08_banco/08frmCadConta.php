@@ -24,6 +24,7 @@
         $reajuste = $_POST['reajuste'];
         $limiteEspecial = $_POST['limiteEspecial'];
 
+
         if($tipoDeConta == 'Poupança'){
 
             $reajuste = (float)$_POST["reajuste"];
@@ -41,18 +42,13 @@
             echo 'Tipo de conta Inválido';
             exit();
         }
-        
-        // $contas[] = $contaObj;
-        // $_SESSION["contas"][] = $contaObj;
 
-        // echo "<h3>Extrato de Conta</h3>";
+        $indiceUltimo = array_key_last($_SESSION["contas"]);
 
-        // foreach($_SESSION["contas"] as $var_conta){
-        //     $var_conta->imprimeExtrato();
-        //     echo "<br>";
-        // } 
+        setcookie("ultimaConta", $indiceUltimo, time() + 3600, "/");
 
         echo '<br>
+
                 <h2>Conta Cadastrada com Sucesso!!!</h2>
                 <br>
                 <a href="08menu.html">
