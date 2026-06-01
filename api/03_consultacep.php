@@ -1,39 +1,72 @@
 <?php
-    if(isset($_POST["cep"])){
 
-        $cep = $_POST["cep"];
+if (!isset($_POST["cep"])) {
 
-        $cep = preg_replace("/[^0-9]/", "", $cep);
+    echo "Nenhum CEP informado!";
+    exit;
+}
 
-        if(strlen($cep) != 8){
+$cep = trim($_POST["cep"]);
 
-            echo "CEP inválido!";
-            exit;
-        }
+// Verifica campo vazio
+if (empty($cep)) {
 
-        // URL da API
-        $url = "https://viacep.com.br/ws/$cep/json/";
+    echo "CEP não informado!";
+    exit;
+}
 
-        // Busca os dados da API
-        $dados = file_get_contents($url);
+// Verifica se contém apenas números
+if (!ctype_digit($cep)) {
 
-        // Converte JSON para array
-        $endereco = json_decode($dados, true);
+    echo "Digite apenas números!";
+    exit;
+}
 
-        if(isset($endereco["erro"])){
+// Verifica tamanho
+if (strlen($cep) != 8) {
 
-            echo "CEP não encontrado!";
-        } else {
+    echo "CEP inválido! Digite 8 números.";
+    exit;
+}
 
-            echo "CEP: " . $endereco["cep"] . "<br>";
-            echo "Rua: " . $endereco["logradouro"] . "<br>";
-            echo "Bairro: " . $endereco["bairro"] . "<br>";
-            echo "Cidade: " . $endereco["localidade"] . "<br>";
-            echo "Estado: " . $endereco["uf"] . "<br>";
-        }
+// URL da API
+$url = "https://viacep.com.br/ws/$cep/json/";
 
-    } else {
+// Inicializa cURL
+$ch = curl_init();
 
-        echo "Nenhum CEP informado!";
-    }
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+$dados = curl_exec($ch);
+
+if (curl_errno($ch)) {
+
+    echo "Erro ao conectar com a API!";
+    curl_close($ch);
+    exit;
+}
+
+curl_close($ch);
+
+// Converte JSON para array
+$endereco = json_decode($dados, true);
+
+// Verifica se CEP existe
+if (isset($endereco["erro"])) {
+
+    echo "CEP não encontrado!";
+    exit;
+}
+
+echo "<h2>Endereço Encontrado</h2>";
+
+echo "CEP: " . htmlspecialchars($endereco["cep"]) . "<br>";
+echo "Rua: " . htmlspecialchars($endereco["logradouro"]) . "<br>";
+echo "Bairro: " . htmlspecialchars($endereco["bairro"]) . "<br>";
+echo "Cidade: " . htmlspecialchars($endereco["localidade"]) . "<br>";
+echo "Estado: " . htmlspecialchars($endereco["uf"]) . "<br>";
+
+echo '<br><a href="03_consultacep.html">Voltar</a>';
 ?>
